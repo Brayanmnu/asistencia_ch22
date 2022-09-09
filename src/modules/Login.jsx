@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Image from '../img/login.jpg'; // Import using relative path
+import Image from '../img/login.png'; // Import using relative path
 import { UserService } from "../services/UserService";
 import Alert from '../components/Alert'
 import Dashboard from './Dashboard';
