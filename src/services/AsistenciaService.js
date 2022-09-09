@@ -1,12 +1,33 @@
 import axios from 'axios';
 
-class RegistroService {
+class AsistenciaService {
     base_url = "https://back-congresohacedores.herokuapp.com/";
 
+    getAsistenciaByMaker = async (idMakerEvento) => {
+        const url = this.base_url + "asistencia/maker-evento/"+idMakerEvento
+        const res = await axios.get(url).catch(function (error) {
+            if (error.response) {
+                return error.response;
+            }
+          });
+        return res;
+        
+    }
+
+    getAllPonencias = async () => {
+        const url = this.base_url + "ponencia/minus-register"
+        const res = await axios.get(url).catch(function (error) {
+            if (error.response) {
+                return error.response;
+            }
+          });
+        return res;
+        
+    }
     
-    getEvento = async () => {
-        const url = this.base_url + "evento/publicado"
-        const res = await axios.get(url).catch(function (error) {
+    registrarAsistencia = async (bodyAsistencia) => {
+        const url = this.base_url + "asistencia/registrar"
+        const res = await axios.post(url,bodyAsistencia).catch(function (error) {
             if (error.response) {
                 return error.response;
             }
@@ -15,25 +36,5 @@ class RegistroService {
         
     }
 
-    getAllTipoDocumento = async () => {
-        const url = this.base_url + "tipo-documento"
-        const res = await axios.get(url).catch(function (error) {
-            if (error.response) {
-                return error.response;
-            }
-          });
-        return res;
-        
-    }
-
-    createMakerBack = async (dataCreate) => {
-        const url = this.base_url + "registrar-maker"
-        const res = await axios.post(url,dataCreate).catch(function (error) {
-            if (error.response) {
-                return error.response;
-            }
-          });
-        return res;
-    }
 }
-export {RegistroService} ;
+export {AsistenciaService} ;
