@@ -153,7 +153,7 @@ let theme = createTheme({
     },
   };
   
-  const drawerWidth = 256;
+  const drawerWidth = 200;
 
   
 export default function Dashboard(props){
