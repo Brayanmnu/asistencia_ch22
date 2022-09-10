@@ -104,10 +104,10 @@ export default function MakerAdmin(props) {
                                             {row.celular}
                                         </TableCell>
                                         <TableCell key="ciudad">
-                                            Ciudad_test
+                                            {row.ciudad}
                                         </TableCell>
                                         <TableCell key="iglesia">
-                                           Iglesia_test
+                                            {row.iglesia}
                                         </TableCell>
                                         <TableCell key="options">
                                             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
