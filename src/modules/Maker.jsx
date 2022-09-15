@@ -43,6 +43,7 @@ export default function MakerAdmin(props) {
     const [apellidos, setApellidos] = useState('');
     const [nroDoc, setNroDoc] = useState('');
     const [cantPaginas,setCantPaginas] = useState(0)
+    const [totalElemnts,setTotalElemnts] = useState(0)
 
     const theme = createTheme({
         palette: {
@@ -85,6 +86,7 @@ export default function MakerAdmin(props) {
                         {rows
                         .map((row) => {
                                 cantPaginas = Math.ceil(row.total_elements / cantReg );
+                                setTotalElemnts(row.total_elements);
                                 setCantPaginas(cantPaginas)
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id_producto}>
@@ -261,13 +263,21 @@ export default function MakerAdmin(props) {
                                     {tableBody}
                                 </Table>
                             </TableContainer>
-                            <Pagination
-                                count={cantPaginas}
-                                page={page}
-                                variant="outlined"
-                                color="primary"
-                                onChange={handleChangePagina}
-                            />
+                            <Grid container>
+                                <Grid item xs={10} sm={10} md={10}>
+                                    <Pagination
+                                        count={cantPaginas}
+                                        page={page}
+                                        variant="outlined"
+                                        color="primary"
+                                        onChange={handleChangePagina}
+                                    />
+                                </Grid>
+                                <Grid item xs={2} sm={2} md={2}>
+                                    Total: {totalElemnts} makers
+                                </Grid>
+                            </Grid>
+                            
                         </Grid>
                     </Grid>
                     <Dialog open={openQr} onClose={() => setOpenQr(false)}>
