@@ -48,33 +48,37 @@ export default function Cartilla (props) {
     const [msgAlert,setMsgAlert]= useState('');
     const [svtAlert,setSvtAlert]= useState('');
     const [statusRegistred, setStatusRegistred] = useState("")
+    const [disabledButton, setDisabledButton] = useState(false)
+    
 
     async function registrarAsistencia() {
-        console.log('idPonencia: '+idPonencia)
         if(idPonencia===""){
             setOpenAlert(true)
             setMsgAlert('Necesita seleccionar una opción')
             setSvtAlert('error')
         }else{
-            setStatusRegistred("ok")
+            setDisabledButton(true)
+            var dataAsistencia = {
+                id_maker_evento: idMakerEvento,
+                id_ponencia: idPonencia
+            }
+            const asistenciaResponse =  await asistenciaService.registrarAsistencia(dataAsistencia);
+            if (asistenciaResponse.status === 200){
+                const asistenciaResponseData = await asistenciaResponse.data;
+                if(asistenciaResponseData.status==="insertado"){
+                    setDisabledButton(false)
+                    setOpenAlert(true)
+                    setMsgAlert('Registrado correctamente')
+                    setSvtAlert('success')
+                    setStatusRegistred("ok")
+                }
+            }
         }
         
-        // var dataAsistencia = {
-        //     id_maker_evento: props.idMakerEvento,
-        //     id_ponencia: idPonencia
-        // }
-        // const asistenciaResponse =  await asistenciaService.registrarAsistencia(dataAsistencia);
-        // if (asistenciaResponse.status === 200){
-        //     const asistenciaResponseData = await asistenciaResponse.data;
-        //     if(asistenciaResponseData.status==="insertado"){
-        //         props.setRegistrado(true);
-        //         setOpenAlert(true)
-        //     }
-        // }
+        
     }
 
     const handleChange = (event) => {
-        console.log('event.target.value: '+event.target.value)
         setIdPonencia('')
         if (event.target.value =="1"){
             if(event.target.checked){
@@ -145,6 +149,7 @@ export default function Cartilla (props) {
     };
 
     useEffect(() => {
+        setStatusRegistred('')
         setIdPonencia('')
         setIsDisabledPrimera(false);
         setIsDisabledSegunda(false)
@@ -153,11 +158,9 @@ export default function Cartilla (props) {
         setIsDisabledQuinta(false)
         const getAsistenciaByMaker = async () => {
             const { data: ponencias } =  await asistenciaService.getAsistenciaByMaker(idMakerEvento);
+            var arr = []
             const itemsPonencia = ponencias.map((p) => (p.nro_ponencia))
             setAsistencias(itemsPonencia)
-            if(statusRegistred==="ok"){
-                setAsistencias(['1','2','3','4','5'])
-            }
         }
     
         Promise.all([
@@ -197,7 +200,7 @@ export default function Cartilla (props) {
                                 },
                               }}
                         >
-                            <Paper variant="outlined" elevation={2} square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
+                            <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
                                 <Typography
                                     style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
                                     gutterBottom
@@ -224,8 +227,8 @@ export default function Cartilla (props) {
                                 },
                               }}
                         >
-                            <Paper variant="outlined" elevation={2} square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
-                                {asistencias.includes('1')?
+                            <Paper variant="outlined"  square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
+                                {asistencias.includes(1)?
                                 <Typography
                                      style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
                                      gutterBottom
@@ -237,7 +240,7 @@ export default function Cartilla (props) {
                                  </Typography>
                                  :null
                                }
-                                {props.isLogin && !asistencias.includes('1')? 
+                                {props.isLogin && !asistencias.includes(1)? 
                                     <div style={{ textAlign: 'center' , padding:"12px" }}>
                                         <Checkbox
                                         disabled={isDisabledPrimera}
@@ -273,8 +276,8 @@ export default function Cartilla (props) {
                                 },
                               }}
                         >
-                            <Paper variant="outlined" elevation={2} square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
-                                {asistencias.includes('2')?
+                            <Paper variant="outlined"  square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
+                                {asistencias.includes(2)?
                                     <Typography
                                          style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
                                          gutterBottom
@@ -286,7 +289,7 @@ export default function Cartilla (props) {
                                      </Typography>
                                      :null
                                 }
-                                {props.isLogin && !asistencias.includes('2')?
+                                {props.isLogin && !asistencias.includes(2)?
                                     <div style={{ textAlign: 'center', padding:"12px"  }}>
                                         <Checkbox
                                         sx={{
@@ -322,8 +325,8 @@ export default function Cartilla (props) {
                                 },
                               }}
                         >
-                            <Paper variant="outlined" elevation={2} square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
-                                {asistencias.includes('3')?
+                            <Paper variant="outlined"  square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
+                                {asistencias.includes(3)?
                                         <Typography
                                         style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
                                         gutterBottom
@@ -334,7 +337,7 @@ export default function Cartilla (props) {
                                         BLE
                                     </Typography>:null
                                 }
-                                {props.isLogin && !asistencias.includes('3')?
+                                {props.isLogin && !asistencias.includes(3)?
                                     <div style={{ textAlign: 'center' , padding:"12px"  }}>
                                         <Checkbox
                                         sx={{
@@ -370,8 +373,8 @@ export default function Cartilla (props) {
                                 },
                               }}
                         >
-                            <Paper variant="outlined" elevation={2} square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
-                                {asistencias.includes('4')?
+                            <Paper variant="outlined"  square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
+                                {asistencias.includes(4)?
                                         <Grid container sx={{ height: '100%' }}>
                                         <Grid
                                         item
@@ -386,7 +389,7 @@ export default function Cartilla (props) {
                                         }}/> 
                                     </Grid>:null
                                 }
-                                {props.isLogin && !asistencias.includes('4')? 
+                                {props.isLogin && !asistencias.includes(4)? 
                                     <div style={{ textAlign: 'center', padding:"12px"  }}>
                                         <Checkbox
                                         sx={{
@@ -422,8 +425,8 @@ export default function Cartilla (props) {
                                 },
                               }}
                         >
-                            <Paper variant="outlined" elevation={2} square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
-                                {asistencias.includes('5')?
+                            <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
+                                {asistencias.includes(5)?
                                         <Typography
                                         style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
                                         gutterBottom
@@ -434,7 +437,7 @@ export default function Cartilla (props) {
                                         22
                                     </Typography>:null
                                 }
-                                {props.isLogin && !asistencias.includes('5')? 
+                                {props.isLogin && !asistencias.includes(5)? 
                                     <div style={{ textAlign: 'center', padding:"12px"   }}>
                                         <Checkbox
                                         sx={{
@@ -460,7 +463,7 @@ export default function Cartilla (props) {
                     <Grid item  xs={12} sm={12}  md={12}>
                         <div style={{ textAlign: 'center' }}>
                             <ThemeProvider theme={theme}>
-                            <Button onClick={registrarAsistencia} variant="contained" fullWidth="true" color="register">
+                            <Button disabled={disabledButton} onClick={registrarAsistencia} variant="contained" fullWidth="true" color="register">
                                     Registrar
                                 </Button>
                             </ThemeProvider>
