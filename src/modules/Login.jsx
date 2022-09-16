@@ -13,6 +13,7 @@ import Image from '../img/login.png'; // Import using relative path
 import { UserService } from "../services/UserService";
 import Alert from '../components/Alert'
 import Dashboard from './Dashboard';
+import Link from '@mui/material/Link';
 
 export default function Login(props) {
 
@@ -114,6 +115,11 @@ export default function Login(props) {
                 </Box>
             </Box>
             </Grid>
+            <div style={{position:"fixed", bottom:"0px"}}>
+                <Typography style={{ color: '#95B1B8' }} fontSize={11}>
+                    © CONGRESO HACEDORES 2022. | Powered by <Link underline="hover"  target="_blank" color='#A1CFDB' href="https://www.instagram.com/soybrayanneyra/">MUTec</Link>
+                </Typography>
+            </div>   
             <Alert openAlert={openAlert} setOpenAlert={setOpenAlert} mensaje="Credenciales incorrectas" severity="error"/>
       </Grid>
     </ThemeProvider>

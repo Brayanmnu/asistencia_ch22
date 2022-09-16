@@ -10,6 +10,8 @@ import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog'
 import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -287,6 +289,11 @@ export default function MakerAdmin(props) {
                     </Dialog>
                 </Paper>
             </Grid>
+            <div style={{position:"fixed", bottom:"0px"}}>
+                <Typography style={{ color: '#28434A' }} fontSize={11}>
+                    © CONGRESO HACEDORES 2022. | Powered by <Link underline="hover"  target="_blank" color='#7164BB' href="https://www.instagram.com/soybrayanneyra/">MUTec</Link>
+                </Typography>
+            </div>
         </Grid>
     );
 }
