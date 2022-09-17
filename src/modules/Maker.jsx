@@ -247,7 +247,7 @@ export default function MakerAdmin(props) {
                 <Paper sx={{width:1030, margin: 'auto', overflow: 'hidden' }}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={12} sm={12} md={12}>
-                            <TableContainer sx={{ maxHeight: 400 }}>
+                            <TableContainer sx={{ maxHeight: 800 }}>
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
