@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ImageBackground from '../img/in_posible_fondo_web.png'; // Import using relative path
 import ImageLogo from '../img/logo_blanco.png'; // Import using relative path
+import Image22 from '../img/22.png'; // Import using relative path
 import Grid from '@mui/material/Grid';
 import { AsistenciaService } from '../services/AsistenciaService'
 import {useParams } from 'react-router-dom'
@@ -49,6 +50,7 @@ export default function Cartilla (props) {
     const [svtAlert,setSvtAlert]= useState('');
     const [statusRegistred, setStatusRegistred] = useState("")
     const [disabledButton, setDisabledButton] = useState(false)
+    const [nombres, setNombres] = useState('')
     
 
     async function registrarAsistencia() {
@@ -157,9 +159,10 @@ export default function Cartilla (props) {
         setIsDisabledCuarta(false)
         setIsDisabledQuinta(false)
         const getAsistenciaByMaker = async () => {
-            const { data: ponencias } =  await asistenciaService.getAsistenciaByMaker(idMakerEvento);
-            var arr = []
-            const itemsPonencia = ponencias.map((p) => (p.nro_ponencia))
+            const { data: detalle } =  await asistenciaService.getAsistenciaByMaker(idMakerEvento);
+            var asistenciasPonencias = detalle.asistencias;
+            setNombres(detalle.nombres)
+            const itemsPonencia = asistenciasPonencias.map((p) => (p.nro_ponencia))
             setAsistencias(itemsPonencia)
         }
     
@@ -186,6 +189,29 @@ export default function Cartilla (props) {
             }}> 
             <div style={{justifyContent:"center",display:"flex"}}>
             <Grid container rowSpacing={-8} columnSpacing={{ xs: -10, sm: -10, md: -10 }} style={{width:"350px"}}>
+                <Grid item  xs={12} sm={12}  md={12}>
+                        <Box
+                            justifyContent="center"
+                            alignItems="center"
+                             sx={{
+                                display: 'flex',
+                                flexWrap: 'wrap'
+                              }}
+                        >
+                            <Paper>
+                                <Typography
+                                    style={{ color: 'black', textAlign: 'center', padding:'3px'}}
+                                    gutterBottom
+                                    variant="h3"
+                                    fontFamily="Alienscows,Roboto,Helvetica"
+                                    fontSize={20}
+                                >
+                                    {nombres}
+                                </Typography>
+                            </Paper>
+                        </Box>
+                    
+                </Grid>
                 <Grid item  xs={12} sm={12}  md={12}>
                         <Box
                             justifyContent="center"
@@ -427,15 +453,21 @@ export default function Cartilla (props) {
                         >
                             <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
                                 {asistencias.includes(5)?
-                                        <Typography
-                                        style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
-                                        gutterBottom
-                                        variant="h3"
-                                        fontFamily="Alienscows,Roboto,Helvetica"
-                                        fontSize={60}
-                                    >
-                                        22
-                                    </Typography>:null
+                                    <Grid container sx={{ height: '100%' }}>
+                                            <Grid
+                                            item
+                                            xs={12}
+                                            sm={12}
+                                            md={12}
+                                            sx={{
+                                                backgroundImage: `url(${Image22})`,
+                                                backgroundRepeat: 'no-repeat',
+                                                backgroundSize: '80%',
+                                                backgroundPosition: 'center',
+                                            }}/> 
+                                        </Grid>
+                                        
+                                    :null
                                 }
                                 {props.isLogin && !asistencias.includes(5)? 
                                     <div style={{ textAlign: 'center', padding:"12px"   }}>
