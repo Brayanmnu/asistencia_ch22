@@ -37,7 +37,7 @@ export default function SideBar(props) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem sx={{ ...item, ...itemCategory, fontSize: 16, color: '#fff' }}>
-          img - Congreso Hacedores
+           Congreso Hacedores
         </ListItem>
         <Link key="home" to="/"  style={{ textDecoration: 'none' }}>
             <ListItem sx={{ ...item, ...itemCategory }}>

@@ -10,6 +10,8 @@ import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog'
 import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -43,6 +45,7 @@ export default function MakerAdmin(props) {
     const [apellidos, setApellidos] = useState('');
     const [nroDoc, setNroDoc] = useState('');
     const [cantPaginas,setCantPaginas] = useState(0)
+    const [totalElemnts,setTotalElemnts] = useState(0)
 
     const theme = createTheme({
         palette: {
@@ -85,6 +88,7 @@ export default function MakerAdmin(props) {
                         {rows
                         .map((row) => {
                                 cantPaginas = Math.ceil(row.total_elements / cantReg );
+                                setTotalElemnts(row.total_elements);
                                 setCantPaginas(cantPaginas)
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id_producto}>
@@ -261,13 +265,21 @@ export default function MakerAdmin(props) {
                                     {tableBody}
                                 </Table>
                             </TableContainer>
-                            <Pagination
-                                count={cantPaginas}
-                                page={page}
-                                variant="outlined"
-                                color="primary"
-                                onChange={handleChangePagina}
-                            />
+                            <Grid container>
+                                <Grid item xs={10} sm={10} md={10}>
+                                    <Pagination
+                                        count={cantPaginas}
+                                        page={page}
+                                        variant="outlined"
+                                        color="primary"
+                                        onChange={handleChangePagina}
+                                    />
+                                </Grid>
+                                <Grid item xs={2} sm={2} md={2}>
+                                    Total: {totalElemnts} makers
+                                </Grid>
+                            </Grid>
+                            
                         </Grid>
                     </Grid>
                     <Dialog open={openQr} onClose={() => setOpenQr(false)}>
@@ -277,6 +289,11 @@ export default function MakerAdmin(props) {
                     </Dialog>
                 </Paper>
             </Grid>
+            <div style={{position:"fixed", bottom:"0px"}}>
+                <Typography style={{ color: '#28434A' }} fontSize={11}>
+                    © CONGRESO HACEDORES 2022. | Powered by <Link underline="hover"  target="_blank" color='#7164BB' href="https://www.instagram.com/soybrayanneyra/">MUTec</Link>
+                </Typography>
+            </div>
         </Grid>
     );
 }
