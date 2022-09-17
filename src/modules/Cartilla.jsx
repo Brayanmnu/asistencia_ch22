@@ -188,31 +188,80 @@ export default function Cartilla (props) {
                 backgroundPosition: 'center',
             }}> 
             <div style={{justifyContent:"center",display:"flex"}}>
-            <Grid container rowSpacing={-8} columnSpacing={{ xs: -10, sm: -10, md: -10 }} style={{width:"350px"}}>
+            <Grid container rowSpacing={-8} columnSpacing={-10} style={{width:"350px"}}>
                 <Grid item  xs={12} sm={12}  md={12}>
-                        <Box
-                            justifyContent="center"
-                            alignItems="center"
-                             sx={{
-                                display: 'flex',
-                                flexWrap: 'wrap'
-                              }}
-                        >
-                            <Paper>
-                                <Typography
-                                    style={{ color: 'black', textAlign: 'center', padding:'3px'}}
-                                    gutterBottom
-                                    variant="h3"
-                                    fontFamily="Alienscows,Roboto,Helvetica"
-                                    fontSize={20}
-                                >
-                                    {nombres}
-                                </Typography>
-                            </Paper>
-                        </Box>
-                    
+                    <Typography
+                        style={{ color: 'white', textAlign: 'center', padding:'1px', paddingTop:'55px'}}
+                        gutterBottom
+                        variant="h3"
+                        fontFamily="Mokoto,Roboto,Helvetica"
+                        fontSize={11}
+                    >
+                        CONGRESO
+                    </Typography>
                 </Grid>
                 <Grid item  xs={12} sm={12}  md={12}>
+                    <Typography
+                        style={{ color: 'white', textAlign: 'center', padding:'1px', paddingBottom:'35px'}}
+                        gutterBottom
+                        variant="h3"
+                        fontFamily="Mokoto,Roboto,Helvetica"
+                        fontSize={10}
+                    >
+                        HACEDORES
+                    </Typography>
+                </Grid>
+                <Grid item  xs={3} sm={3}  md={3}>
+                    <Box
+                        justifyContent="right"
+                        alignItems="right"
+                        sx={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            '& > :not(style)': {
+                            m: 1,
+                            width: 50,
+                            height: 20,
+                            },
+                        }}
+                    >
+                        <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"#B227B3", borderWidth:"2px"}}>
+                            <Typography
+                                style={{ color: 'white', textAlign: 'center', padding:'1px'}}
+                                gutterBottom
+                                variant="h3"
+                                fontFamily="Alienscows,Roboto,Helvetica"
+                                fontSize={15}
+                            >
+                                YO SOY
+                            </Typography>
+                        </Paper>
+                    </Box>
+                </Grid>
+                    <Grid item  xs={9} sm={9}  md={9} paddingTop={0.55}>
+                            <Box
+                                justifyContent="left"
+                                alignItems="left"
+                                sx={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap'
+                                }}
+                            >
+                                <Paper>
+                                    <Typography
+                                        style={{ color: 'black', textAlign: 'center', padding:'3px'}}
+                                        gutterBottom
+                                        variant="h3"
+                                        fontFamily="Mokoto,Roboto,Helvetica"
+                                        fontSize={14}
+                                    >
+                                        {nombres}
+                                    </Typography>
+                                </Paper>
+                            </Box>
+                        
+                    </Grid>
+                <Grid item  xs={12} sm={12}  md={12} paddingTop={4}>
                         <Box
                             justifyContent="center"
                             alignItems="center"
@@ -491,7 +540,10 @@ export default function Cartilla (props) {
                             </Paper>
                         </Box>
                     </Grid>
-                    {props.isLogin? 
+                    {props.isLogin && 
+                    !(asistencias.includes(1) && asistencias.includes(2) 
+                    && asistencias.includes(3) && asistencias.includes(4)
+                    && asistencias.includes(5))? 
                     <Grid item  xs={12} sm={12}  md={12}>
                         <div style={{ textAlign: 'center' }}>
                             <ThemeProvider theme={theme}>

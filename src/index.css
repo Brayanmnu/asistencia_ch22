@@ -3,6 +3,12 @@
   src: url(/public/fonts/Alienscows/Alienscows-Bold-Trial.ttf);
 }
 
+@font-face {
+  font-family: "Mokoto";
+  src: url(/public/fonts/Mokoto/Mokoto_Glitch_Mark_2.ttf);
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
