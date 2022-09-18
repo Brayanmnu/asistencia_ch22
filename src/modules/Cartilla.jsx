@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ImageBackground from '../img/in_posible_fondo_web.png'; // Import using relative path
 import ImageLogo from '../img/logo_blanco.png'; // Import using relative path
 import Image22 from '../img/22.png'; // Import using relative path
+import ImageIn from '../img/IN_MOMENT.png'; // Import using relative path
 import Grid from '@mui/material/Grid';
 import { AsistenciaService } from '../services/AsistenciaService'
 import {useParams } from 'react-router-dom'
@@ -202,7 +203,7 @@ export default function Cartilla (props) {
                 </Grid>
                 <Grid item  xs={12} sm={12}  md={12}>
                     <Typography
-                        style={{ color: 'white', textAlign: 'center'}}
+                        style={{ color: 'white', textAlign: 'center', paddingBottom:'20px'}}
                         gutterBottom
                         variant="h3"
                         fontFamily="Mokoto,Roboto,Helvetica"
@@ -276,14 +277,19 @@ export default function Cartilla (props) {
                               }}
                         >
                             <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
-                                <Typography
-                                    style={{ color: 'white', textAlign: 'center'}}
-                                    variant="h3"
-                                    fontFamily="Alienscows,Roboto,Helvetica"
-                                    fontSize={60}
-                                >
-                                    IN
-                                </Typography> 
+                                <Grid container sx={{ height: '100%' }}>
+                                    <Grid
+                                    item
+                                    xs={12}
+                                    sm={12}
+                                    md={12}
+                                    sx={{
+                                        backgroundImage: `url(${ImageIn})`,
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundSize: '100%',
+                                        backgroundPosition: 'center',
+                                    }}/> 
+                                </Grid>
                             </Paper>
                         </Box>
                     </Grid>
