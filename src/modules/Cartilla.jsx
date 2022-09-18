@@ -278,13 +278,12 @@ export default function Cartilla (props) {
                             <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
                                 <Typography
                                     style={{ color: 'white', textAlign: 'center'}}
-                                    gutterBottom
                                     variant="h3"
                                     fontFamily="Alienscows,Roboto,Helvetica"
                                     fontSize={60}
                                 >
                                     IN
-                                </Typography>
+                                </Typography> 
                             </Paper>
                         </Box>
                     </Grid>
@@ -305,7 +304,7 @@ export default function Cartilla (props) {
                             <Paper variant="outlined"  square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
                                 {asistencias.includes(1)?
                                 <Typography
-                                     style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
+                                     style={{ color: 'white', textAlign: 'center'}}
                                      gutterBottom
                                      variant="h3"
                                      fontFamily="Alienscows,Roboto,Helvetica"
