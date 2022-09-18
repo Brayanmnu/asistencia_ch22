@@ -22,9 +22,12 @@ import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 import ClearIcon from '@mui/icons-material/Clear';
 import Pagination from "@mui/material/Pagination";
-
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 //Servicios
 import { MakerService } from "../services/MakerService";
+import { AsistenciaService } from "../services/AsistenciaService";
 
 //Vistas
 import MakersQrModal from "./MakersQrModal";
@@ -32,6 +35,7 @@ import MakersQrModal from "./MakersQrModal";
 
 export default function MakerAdmin(props) {
     const makerService = new MakerService();
+    const asistenciaService = new AsistenciaService();
 
     const [page, setPage] = useState(1);
     const [tableBody, setTableBody] = useState();
@@ -46,6 +50,7 @@ export default function MakerAdmin(props) {
     const [nroDoc, setNroDoc] = useState('');
     const [cantPaginas,setCantPaginas] = useState(0)
     const [totalElemnts,setTotalElemnts] = useState(0)
+    const [totalCartillaEntregadas,setTotalCartillaEntregadas] = useState(0)
 
     const theme = createTheme({
         palette: {
@@ -63,6 +68,7 @@ export default function MakerAdmin(props) {
     });
     
     const columns= [
+        { id: 'asistencia',align: 'center', label: 'Asistencia', minWidth: 170 , format: 'string'},
         { id: 'nombres',align: 'center', label: 'Nombres', minWidth: 170 , format: 'string'},
         { id: 'apellidos',align: 'center', label: 'Apellidos', minWidth: 170, format: 'string' },
         { id: 'nroDoc',align: 'center', label: 'Nro. Documento.', minWidth: 170, format: 'string' },
@@ -76,7 +82,7 @@ export default function MakerAdmin(props) {
     
     var rows = [];
 
-    
+
     async function reloadAllMakers(cantReg,nroPag,nom,apell,nroD) {
         const makersAll =  await makerService.getMakersByFiltersAndPagination(cantReg,nroPag,nom,apell,nroD);
         if (makersAll.status === 200){
@@ -90,8 +96,44 @@ export default function MakerAdmin(props) {
                                 cantPaginas = Math.ceil(row.total_elements / cantReg );
                                 setTotalElemnts(row.total_elements);
                                 setCantPaginas(cantPaginas)
+                                var asistencias =''
+                                var asisAux =''
+                                if(row.nro_asistencia==""){
+                                    asistencias = <HighlightOffIcon/>
+                                }else{
+                                    var asisAux = row.nro_asistencia.map((p) => (
+                                        p.nro_ponencia
+                                    ))
+                                    var palabra='';
+                                    var pulsera='';
+                                    var logo = '';
+                                    if (asisAux.includes(6)){
+                                        pulsera = <CheckCircleIcon/> 
+                                    }
+                                    if (asisAux.includes(1) ){
+                                        palabra = ' IN '
+                                    }
+                                    if (asisAux.includes(2) ){
+                                        palabra+=' PO'
+                                    }
+                                    if (asisAux.includes(3) ){
+                                        palabra+='SI'
+                                    }
+                                    if (asisAux.includes(4) ){
+                                        palabra+='BLE'
+                                    }
+                                    if (asisAux.includes(5) ){
+                                        logo= <EmojiEmotionsIcon/>
+                                    }
+                                    asistencias = <div>{pulsera} {palabra} {logo}</div>
+                                    
+                                }
+                                setTotalCartillaEntregadas(row.cant_cartillas)
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id_producto}>
+                                        <TableCell key="asistencia">
+                                            {asistencias}
+                                        </TableCell>
                                         <TableCell key="nombres">
                                             {row.nombres}
                                         </TableCell>
@@ -151,6 +193,9 @@ export default function MakerAdmin(props) {
 
     async function clearFiltro() {
         setCantiRegistros('10')
+        setNombre('')
+        setApellidos('')
+        setNroDoc('')
         reloadAllMakers(10,0,"","","")
         setPage(1);
     }
@@ -266,7 +311,7 @@ export default function MakerAdmin(props) {
                                 </Table>
                             </TableContainer>
                             <Grid container>
-                                <Grid item xs={10} sm={10} md={10}>
+                                <Grid item xs={8} sm={8} md={8}>
                                     <Pagination
                                         count={cantPaginas}
                                         page={page}
@@ -275,8 +320,8 @@ export default function MakerAdmin(props) {
                                         onChange={handleChangePagina}
                                     />
                                 </Grid>
-                                <Grid item xs={2} sm={2} md={2}>
-                                    Total: {totalElemnts} makers
+                                <Grid item xs={4} sm={4} md={4}>
+                                    Total: {totalElemnts} makers /  {totalCartillaEntregadas} pulseras entregadas
                                 </Grid>
                             </Grid>
                             
