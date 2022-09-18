@@ -187,11 +187,11 @@ export default function Cartilla (props) {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}> 
-            <div style={{justifyContent:"center",display:"flex"}}>
+            <div style={{justifyContent:"center",display:"flex" , paddingTop:'100px'}}>
             <Grid container rowSpacing={-8} columnSpacing={-10} style={{width:"350px"}}>
                 <Grid item  xs={12} sm={12}  md={12}>
                     <Typography
-                        style={{ color: 'white', textAlign: 'center', padding:'1px', paddingTop:'55px'}}
+                        style={{ color: 'white', textAlign: 'center'}}
                         gutterBottom
                         variant="h3"
                         fontFamily="Mokoto,Roboto,Helvetica"
@@ -202,7 +202,7 @@ export default function Cartilla (props) {
                 </Grid>
                 <Grid item  xs={12} sm={12}  md={12}>
                     <Typography
-                        style={{ color: 'white', textAlign: 'center', padding:'1px', paddingBottom:'35px'}}
+                        style={{ color: 'white', textAlign: 'center'}}
                         gutterBottom
                         variant="h3"
                         fontFamily="Mokoto,Roboto,Helvetica"
@@ -211,7 +211,7 @@ export default function Cartilla (props) {
                         HACEDORES
                     </Typography>
                 </Grid>
-                <Grid item  xs={3} sm={3}  md={3}>
+                {/* <Grid item  xs={3} sm={3}  md={3}>
                     <Box
                         justifyContent="right"
                         alignItems="right"
@@ -237,11 +237,11 @@ export default function Cartilla (props) {
                             </Typography>
                         </Paper>
                     </Box>
-                </Grid>
-                    <Grid item  xs={9} sm={9}  md={9} paddingTop={0.55}>
+                </Grid> */}
+                    <Grid item  xs={12} sm={12}  md={12}>
                             <Box
-                                justifyContent="left"
-                                alignItems="left"
+                                justifyContent="center"
+                                alignItems="center"
                                 sx={{
                                     display: 'flex',
                                     flexWrap: 'wrap'
@@ -249,7 +249,7 @@ export default function Cartilla (props) {
                             >
                                 <Paper>
                                     <Typography
-                                        style={{ color: 'black', textAlign: 'center', padding:'3px'}}
+                                        style={{ color: 'black', textAlign: 'center', padding:'4px'}}
                                         gutterBottom
                                         variant="h3"
                                         fontFamily="Mokoto,Roboto,Helvetica"
@@ -277,7 +277,7 @@ export default function Cartilla (props) {
                         >
                             <Paper variant="outlined" square="true" style={{background:"transparent", borderColor:"white", borderWidth:"2px"}}>
                                 <Typography
-                                    style={{ color: 'white', textAlign: 'center', padding:'-10px'}}
+                                    style={{ color: 'white', textAlign: 'center'}}
                                     gutterBottom
                                     variant="h3"
                                     fontFamily="Alienscows,Roboto,Helvetica"
