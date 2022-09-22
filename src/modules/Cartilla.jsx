@@ -57,7 +57,8 @@ export default function Cartilla (props) {
     const [statusRegistred, setStatusRegistred] = useState("")
     const [disabledButton, setDisabledButton] = useState(false)
     const [nombres, setNombres] = useState('')
-    
+    const [stickersActivos, setStickersActivos] = useState('');
+
 
     async function registrarAsistencia() {
         if(idPonencia===""){
@@ -204,9 +205,18 @@ export default function Cartilla (props) {
                 setIsDisabledQuinta(true)
             }
         }
+
+        const getPermisosAsistencia = async () => {
+            const { data: detalle } =  await asistenciaService.getAsistenciaPermisos();
+            const itemsPermisos = detalle.map((p) => (p.nro_sticker))
+            var permisosAux = itemsPermisos.toString();
+            permisosAux = permisosAux.replaceAll(',','')
+            setStickersActivos(permisosAux)
+        }
     
         Promise.all([
             getAsistenciaByMaker(),
+            getPermisosAsistencia()
         ])
 
         props.setIsCartilla(false)
@@ -332,7 +342,7 @@ export default function Cartilla (props) {
                                         
                                     :null
                                 }
-                                {props.isLogin && !asistencias.includes(1)? 
+                                {props.isLogin && !asistencias.includes(1) && stickersActivos.includes(1)? 
                                     <div style={{ textAlign: 'center', padding:"12px"   }}>
                                         <Checkbox
                                         sx={{
@@ -386,7 +396,7 @@ export default function Cartilla (props) {
                                         
                                     :null
                                }
-                                {props.isLogin && !asistencias.includes(2)? 
+                                {props.isLogin && !asistencias.includes(2)&& stickersActivos.includes(2)? 
                                     <div style={{ textAlign: 'center' , padding:"12px" }}>
                                         <Checkbox
                                         disabled={isDisabledSegunda}
@@ -440,7 +450,7 @@ export default function Cartilla (props) {
                                         
                                     :null
                                 }
-                                {props.isLogin && !asistencias.includes(3)?
+                                {props.isLogin && !asistencias.includes(3)&& stickersActivos.includes(3)?
                                     <div style={{ textAlign: 'center', padding:"12px"  }}>
                                         <Checkbox
                                         sx={{
@@ -494,7 +504,7 @@ export default function Cartilla (props) {
                                         
                                     :null
                                 }
-                                {props.isLogin && !asistencias.includes(4)?
+                                {props.isLogin && !asistencias.includes(4)&& stickersActivos.includes(4)?
                                     <div style={{ textAlign: 'center' , padding:"12px"  }}>
                                         <Checkbox
                                         sx={{
@@ -546,7 +556,7 @@ export default function Cartilla (props) {
                                         }}/> 
                                     </Grid>:null
                                 }
-                                {props.isLogin && !asistencias.includes(5)? 
+                                {props.isLogin && !asistencias.includes(5)&& stickersActivos.includes(5)? 
                                     <div style={{ textAlign: 'center', padding:"12px"  }}>
                                         <Checkbox
                                         sx={{

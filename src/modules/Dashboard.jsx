@@ -9,6 +9,7 @@ import Home from './Home'
 import Header from './Header';
 
 import MakerAdmin from './Maker'
+import CartillaAdmin from './CartillaAdmin'
 
 let theme = createTheme({
     palette: {
@@ -165,7 +166,6 @@ export default function Dashboard(props){
     };
 
     const handleIsLogin = () => {
-      console.log('cierra sesion')
       props.setIsLogin(false)
     }
   
@@ -186,11 +186,13 @@ export default function Dashboard(props){
                 variant="temporary"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
+                tipoUsuario = {props.tipoUsuario}
               />
             )}
             <SideBar
               PaperProps={{ style: { width: drawerWidth } }}
               sx={{ display: { sm: 'block', xs: 'none' } }}
+              tipoUsuario = {props.tipoUsuario}
               />
           </Box>
           <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -199,6 +201,11 @@ export default function Dashboard(props){
                 <Routes>
                     <Route path={'/'} exact element={<Home/>} />
                     <Route path={'/maker-dashboard'} exact element={<MakerAdmin isSmUp={isSmUp}/>}/>
+                    {
+                      props.tipoUsuario=='1'?
+                      <Route path={'/cartilla-admin'} exact element={<CartillaAdmin/>}/>
+                       : null 
+                    }
                 </Routes>              
             </Box>
           </Box>

@@ -35,6 +35,28 @@ class AsistenciaService {
         return res;
         
     }
+        
+    actualizarPermisos = async (bodyPermisos) => {
+        const url = this.base_url + "asistencia/permisos"
+        const res = await axios.post(url,bodyPermisos).catch(function (error) {
+            if (error.response) {
+                return error.response;
+            }
+          });
+        return res;
+        
+    }
+    
+    getAsistenciaPermisos = async () => {
+        const url = this.base_url + "asistencia/permisos"
+        const res = await axios.get(url).catch(function (error) {
+            if (error.response) {
+                return error.response;
+            }
+          });
+        return res;
+        
+    }
 
 }
 export {AsistenciaService} ;

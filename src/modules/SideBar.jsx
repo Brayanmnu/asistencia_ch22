@@ -10,10 +10,14 @@ import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import {Link} from "react-router-dom";
 import GroupsIcon from '@mui/icons-material/Groups';  
+import StyleIcon from '@mui/icons-material/Style';
 
-const menu =  [
-    { id: 'Makers', icon: <GroupsIcon /> , url: "/maker-dashboard"}
-]
+export default function SideBar(props) {
+
+  const menu =  [
+    { id: 'Makers', icon: <GroupsIcon /> , url: "/maker-dashboard", permisos:'1,2'},
+    { id: 'Cartilla', icon: <StyleIcon /> , url: "/cartilla-admin", permisos:'1'}
+  ]
 
 const item = {
   py: '2px',
@@ -30,7 +34,6 @@ const itemCategory = {
   px: 3,
 };
 
-export default function SideBar(props) {
   const { ...other } = props;
 
   return (
@@ -48,8 +51,9 @@ export default function SideBar(props) {
             </ListItem>
         </Link>
           <Box sx={{ bgcolor: '#101F33' }}>
-            {menu.map(({ id: childId, icon, active, url }) => {
+            {menu.map(({ id: childId, icon, active, url, permisos }) => {
                 return (
+                  permisos.includes(props.tipoUsuario)?
                     <Link key={childId} to={url}  style={{ textDecoration: 'none' }}>
                         <ListItem disablePadding key={childId}>
                         <ListItemButton selected={active} sx={item}>
@@ -59,6 +63,8 @@ export default function SideBar(props) {
                         </ListItem>
                         <Divider sx={{ mt: 2 }} />
                     </Link>
+                  :
+                  null
                 )
             })}
           </Box>

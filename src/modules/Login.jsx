@@ -29,10 +29,7 @@ export default function Login(props) {
             usuario: data.get('usuario'),
             password: data.get('pwd')
         }
-        console.log('usuario:'+credentials.usuario)
-        console.log('pwd:'+credentials.password)
         const loginResponse =  await userService.login(credentials);
-        console.log('loginResponse:'+loginResponse.status)
         if (loginResponse.status === 200){
             const loginResponseData = await loginResponse.data; 
             if(loginResponseData.status=="1"){
@@ -40,6 +37,7 @@ export default function Login(props) {
                 window.localStorage.setItem(
                     'loggedMaker' , JSON.stringify(loginResponseData)
                 )
+                props.setTipoUsuario(loginResponseData.tipo_usuario)
             }else{
                 setOpenAlert(true);
             }
@@ -49,7 +47,7 @@ export default function Login(props) {
     };
 
     
-  return props.isLogin?<Dashboard setIsLogin={props.setIsLogin}/>:(
+  return props.isLogin?<Dashboard setIsLogin={props.setIsLogin} tipoUsuario={props.tipoUsuario}/>:(
         <ThemeProvider theme={theme}>
         <Grid container component="main" sx={{ height: '100vh' }}>
             <CssBaseline />

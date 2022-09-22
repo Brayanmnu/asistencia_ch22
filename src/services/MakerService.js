@@ -18,7 +18,6 @@ class MakerService {
         }
 
         const url = this.base_url + "makers/"+cantRegistros+"/"+nroPagina+"?"+optional
-        console.log('url:'+url)
         const res = await axios.get(url).catch(function (error) {
             if (error.response) {
                 return error.response;

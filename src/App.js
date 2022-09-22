@@ -8,12 +8,17 @@ export default function App () {
 
   const[isCartilla, setIsCartilla] = useState(true);
   const[isLogin, setIsLogin] = useState(false);
+  const[tipoUsuario, setTipoUsuario] = useState('');
 
   useEffect(() => {
-    const loggedMakerJSON = window.localStorage.getItem('loggedMaker')
+    var loggedMakerJSON = window.localStorage.getItem('loggedMaker')
+    
     if(loggedMakerJSON){
         setIsLogin(true)
+        loggedMakerJSON = JSON.parse(loggedMakerJSON)
+        setTipoUsuario(loggedMakerJSON.tipo_usuario)
     }else{
+        setTipoUsuario('')
         setIsLogin(false)
     }
   }, [isLogin]);
@@ -23,7 +28,7 @@ export default function App () {
       <Routes>
         <Route path={'/cartilla/:idMakerEvento'} exact element={<Cartilla setIsCartilla={setIsCartilla} isLogin={isLogin}/>} />
       </Routes>
-      {isCartilla?<Login isLogin={isLogin} setIsLogin={setIsLogin}/>:null}
+      {isCartilla?<Login tipoUsuario={tipoUsuario} setTipoUsuario={setTipoUsuario} isLogin={isLogin} setIsLogin={setIsLogin}/>:null}
     </Router>
   )
    
